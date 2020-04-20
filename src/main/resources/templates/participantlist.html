@@ -1,0 +1,46 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+	<title>Fight List</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<link type="text/css" rel="stylesheet" href="../css/bootstrap.min.css" th:href="@{../css/bootstrap.min.css}" />
+</head>
+<body>
+	<div class="col-md-12">
+		<h1 th:inline="text" style="display:inline;">Participants of </h1><h1 th:text="${fight.name}" style="display:inline;"></h1>
+	</div>
+	
+	<div class="col-md-12" sec:authorize="hasAuthority('ADMIN')">
+		<h3 th:inline="text">Welcome [[${#httpServletRequest.remoteUser}]]</h3>
+	</div>
+	
+	<div class="col-md-4" sec:authorize="hasAuthority('ADMIN')">
+		<form th:action="@{/logout}" method="post">
+			<input type="submit" value="Sign Out" class="btn btn-danger"/>
+		</form>
+		<a sec:authorize="!hasAuthority('ADMIN')" href="/login" class="btn btn-success">Login</a>
+	</div>
+	<br>
+	<table class="table table-striped">
+		<tr>
+			<th>Fighter</th>
+			<th>Team</th>
+			<th>Status</th>
+			<th sec:authorize="hasAuthority('ADMIN')"></th>
+			<th sec:authorize="hasAuthority('ADMIN')"></th>
+		</tr>
+
+		<tr th:each="part : ${participants}">
+			<td th:text="${part.fighter.name}">Fighter</td>
+			<td th:text="${part.team}">Team</td>
+			<td th:text="${part.status}">Status</td>
+			<td sec:authorize="hasAuthority('ADMIN')"><a th:href="@{/deletepart/{partid}(partid=${part.partid})}" class="btn btn-danger">Delete</a></td>
+			<td sec:authorize="hasAuthority('ADMIN')"><a th:href="@{/editpart/{partid}(partid=${part.partid})}"  class="btn btn-danger">Edit</a></td>
+		</tr>
+	</table>
+	<a sec:authorize="hasAuthority('ADMIN')" th:href="@{/newpart/{fightid}(fightid=${fight.fightid})}" style="margin-left: 1%;" class="btn btn-success">New participant in this fight.</a>
+	<a href="/arenalist" class="btn btn-success" style="float: right; margin-left: 2%; margin-right:1%">Arenas</a>
+	<a href="/fighterlist" class="btn btn-success" style="float: right;">Fighters</a>
+
+</body>
+</html>

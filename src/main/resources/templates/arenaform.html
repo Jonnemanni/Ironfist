@@ -1,0 +1,42 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>New arena</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link type="text/css" rel="stylesheet" href="css/bootstrap.min.css" th:href="@{css/bootstrap.min.css}" />
+</head>
+<body>
+
+<h1 class="col-md-12">A new arena!</h1>
+
+<div class="col-md-12">
+	<form th:object= ${arena} th:action="@{/savearena}" action="#" method="post">
+	<div class="form-group" style="width: 30%;">
+		<label for="arenaname">Name</label>
+		<input type="text" class="form-control" placeholder="Enter arena name" id="arenaname" th:field="${arena.name}" />
+	</div>
+	<div class="form-group" style="width: 30%;">
+		<label for="type">Type</label>
+		<select class="form-control" id="type" th:field="${arena.type}">
+			<option value="Standard">Standard</option>
+			<option value="Cage">Cage</option>
+			<option value="Boundless">Boundless</option>
+		</select>
+	</div>
+	<div class="form-group" style="width: 30%;">
+		<label for="description">Description</label>
+		<input type="text" class="form-control" placeholder="Enter arena description" id="description"  th:field="${arena.description}" />
+	</div>			
+		<!--<label for="catlist">Category</label>
+		<select id="catlist" th:field="*{category}" class="form-control">
+    	  	<option th:each="category:${categories}" th:value="${category.categoryid}" th:text="${category.name}"></option>
+    	</select>-->
+		
+		<div style="clear: both; display: block; height: 10px;"></div>
+		<input type="submit" value="Submit" class="btn btn-primary"/> <input type="reset" value="Reset" class="btn btn-danger"/>
+		
+	</form>
+</div>
+	
+</body>
+</html>

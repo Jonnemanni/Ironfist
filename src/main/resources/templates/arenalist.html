@@ -1,0 +1,50 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+	<title>Arena List</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<link type="text/css" rel="stylesheet" href="css/bootstrap.min.css" th:href="@{css/bootstrap.min.css}" />
+</head>
+<body>
+	<div class="col-md-12">
+		<h1 th:inline="text">Arenas of the XXVI Ironfist Tournament</h1>
+	</div>
+	
+	<div class="col-md-12" sec:authorize="hasAuthority('ADMIN')">
+		<h3 th:inline="text">Welcome [[${#httpServletRequest.remoteUser}]]</h3>
+	</div>
+	
+	<div class="col-md-4" sec:authorize="hasAuthority('ADMIN')">
+		<form th:action="@{/logout}" method="post">
+			<input type="submit" value="Sign Out" class="btn btn-danger"/>
+		</form>
+		<a sec:authorize="!hasAuthority('ADMIN')" href="/login" class="btn btn-success">Login</a>
+	</div>
+	<br>
+	<table class="table table-striped">
+		<tr>
+			<th>ID</th>
+			<th>Name</th>
+			<th>Type</th>
+			<th>Description</th>
+			<th sec:authorize="hasAuthority('ADMIN')"></th>
+			<th sec:authorize="hasAuthority('ADMIN')"></th>
+		</tr>
+
+		<tr th:each="arena : ${arenas}">
+			<td th:text="${arena.arenaid}">id</td>
+			<td th:text="${arena.name}">name</td>
+			<td th:text="${arena.type}">style</td>
+			<td th:text="${arena.description}">height</td>
+			<td sec:authorize="hasAuthority('ADMIN')"><a th:href="@{/deletearena/{arenaid}(arenaid=${arena.arenaid})}" class="btn btn-danger">Delete</a></td>
+			<td sec:authorize="hasAuthority('ADMIN')"><a th:href="@{/editarena/{arenaid}(arenaid=${arena.arenaid})}"  class="btn btn-danger">Edit</a></td>
+		</tr>
+	</table>
+		 	<!--  
+			-->
+	<a sec:authorize="hasAuthority('ADMIN')" href="/newarena" style="margin-left: 1%;" class="btn btn-success">New Arena</a>
+	<a href="/fighterlist" class="btn btn-success" style="float: right; margin-left: 2%; margin-right:1%">Fighters</a>
+	<a href="/fightlist" class="btn btn-success" style="float: right;">Fights</a>
+	
+</body>
+</html>

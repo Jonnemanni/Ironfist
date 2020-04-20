@@ -1,0 +1,48 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Adjust fighter</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link type="text/css" rel="stylesheet" href="../css/bootstrap.min.css" th:href="@{../css/bootstrap.min.css}" />
+</head>
+<body>
+
+<h1 class="col-md-12">Time for a shake up.</h1>
+
+<div class="col-md-12">
+	<form th:object= ${participant} th:action="@{/savepart}" action="#" method="post">
+	<div class="form-group" style="width: 30%;">
+		<label for="id">ID</label>
+		<input type="text" class="form-control" id="id" partid="partid" th:field="*{partid}" readonly="readonly" />
+	</div>
+	<div class="form-group" style="width: 30%;">
+		<label for="team">Team</label>
+		<input type="text" class="form-control" placeholder="Enter participants team" id="team" th:field="${participant.team}" />
+	</div>
+	<div class="form-group" style="width: 30%;">
+		<label for="status">Status</label>
+		<input type="text" class="form-control" placeholder="Enter participant status" id="status"  th:field="${participant.status}" />
+	</div>
+	<div>					
+		<label for="fighterlist">Fighter</label>
+		<select id="fighterlist" th:field="*{fighter}" class="form-control" style="width: 30%;">
+    	  	<option th:each="fighter:${fighters}" th:value="${fighter.fighterid}" th:text="${fighter.name}"></option>
+    	</select>
+    </div>
+	<div>					
+		<label for="fightlist">Fighter</label>
+		<select id="fightlist" th:field="*{fight}" class="form-control" style="width: 30%;" disabled>
+    	  	<option th:each="fight:${fights}" th:value="${fight.fightid}" th:text="${fight.name}" disabled/>
+    	</select>
+    </div>
+	<div>					
+		<input type="hidden" id="fight" th:field="*{fight}"/>
+    </div>
+		
+		<div style="clear: both; display: block; height: 10px;"></div>
+		<input type="submit" value="Submit" class="btn btn-success"/>
+	</form>
+</div>
+	
+</body>
+</html>

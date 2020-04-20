@@ -1,0 +1,41 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Adjust arena</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link type="text/css" rel="stylesheet" href="../css/bootstrap.min.css" th:href="@{../css/bootstrap.min.css}" />
+</head>
+<body>
+
+<h1 class="col-md-12">Time for a change of scenery.</h1>
+
+<div class="col-md-12">
+	<form th:object= ${arena} th:action="@{/savearena}" action="#" method="post">
+	<div class="form-group" style="width: 30%;">
+		<label for="id">ID</label>
+		<input type="text" class="form-control" id="id" arenaid="arenaid" th:field="*{arenaid}" readonly="readonly" />
+	</div>
+	<div class="form-group" style="width: 30%;">
+		<label for="name">Name</label>
+		<input type="text" class="form-control" id="name" th:field="${arena.name}" />
+	</div>
+	<div class="form-group" style="width: 30%;">
+		<label for="type">Type</label>
+		<select class="form-control" id="type" th:field="${arena.type}">
+			<option value="Standard">Standard</option>
+			<option value="Cage">Cage</option>
+			<option value="Boundless">Boundless</option>
+		</select>
+	</div>
+	<div class="form-group" style="width: 30%;">
+		<label for="description">Description</label>
+		<input type="text" class="form-control" id="description" th:field="${arena.description}" />
+	</div>
+		
+		<div style="clear: both; display: block; height: 10px;"></div>
+		<input type="submit" value="Submit" class="btn btn-success"/>
+	</form>
+</div>
+	
+</body>
+</html>

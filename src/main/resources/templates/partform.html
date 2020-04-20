@@ -1,0 +1,45 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>New participant</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link type="text/css" rel="stylesheet" href=".css/bootstrap.min.css" th:href="@{../css/bootstrap.min.css}" />
+</head>
+<body>
+
+<h1 class="col-md-12">Another participant steps into the fight.</h1>
+
+<div class="col-md-12">
+	<form th:object= ${participant} th:action="@{/savepart}" action="#" method="post">
+	<div>					
+		<label for="fighterlist">Fighter</label>
+		<select id="fighterlist" th:field="*{fighter}" class="form-control" style="width: 30%;">
+    	  	<option th:each="fighter:${fighters}" th:value="${fighter.fighterid}" th:text="${fighter.name}"></option>
+    	</select>
+    </div>
+	<div class="form-group" style="width: 30%;">
+		<label for="team">Team</label>
+		<input type="text" class="form-control" placeholder="Enter participants team" id="team" th:field="${participant.team}" />
+	</div>
+	<div class="form-group" style="width: 30%;">
+		<label for="status">Status</label>
+		<input type="text" class="form-control" placeholder="Enter participant status" id="status"  th:field="${participant.status}" />
+	</div>
+	<div>
+		<!-- Well I tried to make a fight select that took the value from the fight we were looking at, but I could not get it to work. -->	
+		<label for="fightlist">Fight</label>
+		<select id="fightlist" th:field="*{fight}" class="form-control" style="width: 30%;">
+    	  	<option th:each="fight:${fights}" th:value="${fight.fightid}" th:text="${fight.name}"></option>
+    	</select>
+    </div>
+	<div>					
+	<!-- <input type="hidden" id="fight" th:field="*{fight}" th:value="${fight.fightid}"/>-->
+    </div>
+		<div style="clear: both; display: block; height: 10px;"></div>
+		<input type="submit" value="Submit" class="btn btn-primary"/> <input type="reset" value="Reset" class="btn btn-danger"/>
+		
+	</form>
+</div>
+	
+</body>
+</html>

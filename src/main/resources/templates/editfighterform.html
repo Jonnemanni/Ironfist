@@ -1,0 +1,41 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Adjust fighter</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link type="text/css" rel="stylesheet" href="../css/bootstrap.min.css" th:href="@{../css/bootstrap.min.css}" />
+</head>
+<body>
+
+<h1 class="col-md-12">Time for a shake up.</h1>
+
+<div class="col-md-12">
+	<form th:object= ${fighter} th:action="@{/savefighter}" action="#" method="post">
+	<div class="form-group" style="width: 30%;">
+		<label for="id">ID</label>
+		<input type="text" class="form-control" id="id" fighterid="fighterid" th:field="*{fighterid}" readonly="readonly" />
+	</div>
+	<div class="form-group" style="width: 30%;">
+		<label for="name">Name</label>
+		<input type="text" class="form-control" id="name" th:field="${fighter.name}" />
+	</div>
+	<div class="form-group" style="width: 30%;">
+		<label for="style">Style</label>
+		<input type="text" class="form-control" id="style" th:field="${fighter.style}" />
+	</div>
+	<div class="form-group" style="width: 30%;">
+		<label for="height">Height</label>
+		<input type="text" class="form-control" id="height" th:field="${fighter.height}" />
+	</div>
+	<div class="form-group" style="width: 30%;">
+		<label for="weight">Weight</label>
+		<input type="text" class="form-control" id="weight" th:field="${fighter.weight}" />
+	</div>
+		
+		<div style="clear: both; display: block; height: 10px;"></div>
+		<input type="submit" value="Submit" class="btn btn-success"/>
+	</form>
+</div>
+	
+</body>
+</html>
