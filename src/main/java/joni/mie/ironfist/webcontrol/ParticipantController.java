@@ -6,13 +6,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import joni.mie.ironfist.domain.Fight;
 import joni.mie.ironfist.domain.FightRepository;
 import joni.mie.ironfist.domain.FighterRepository;
 import joni.mie.ironfist.domain.Participant;
@@ -44,6 +44,7 @@ public class ParticipantController {
 	}
 	
 	// RESTful service to get all fighters
+	@CrossOrigin
     @RequestMapping(value="/participants/{fightid}", method = RequestMethod.GET)
     public @ResponseBody List<Participant> partListRest(@PathVariable("fightid") Long fightid) {	
         return (List<Participant>) PtRepository.findByFight(FtRepository.findById(fightid).get());	
