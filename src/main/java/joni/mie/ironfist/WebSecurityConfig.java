@@ -25,7 +25,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         .authorizeRequests().antMatchers("/css/**").permitAll() // Enable css when logged out
         .and()
         .authorizeRequests()
-        .antMatchers("/", "/fighterlist", "/arenalist", "/fightlist", "/partlist/{id}").permitAll()
+        .antMatchers("/", "/fighterlist", "/arenalist", "/fightlist", "/partlist/{id}", "/fighters", "/arenas", "/fights", "/participants/{fightid}").permitAll()
         .antMatchers("/delete/{id}", "/add", "/save", "/newfighter").hasAuthority("ADMIN")
           .anyRequest().authenticated()
           .and()
